@@ -876,7 +876,7 @@ public class TelephonyManager {
 	    simSerialNumber = getSubscriberInfo().getIccSerialNumber();
 	    Taint.addTaintString(simSerialNumber, Taint.TAINT_ICCID);
      	    // end WITH_TAINT_TRACKING
-     	    
+     	    Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getIccSerialNumber\" } }");
             return simSerialNumber;
         } catch (RemoteException ex) {
             return null;
