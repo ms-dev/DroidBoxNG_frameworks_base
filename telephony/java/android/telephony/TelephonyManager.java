@@ -876,6 +876,7 @@ public class TelephonyManager {
 	    simSerialNumber = getSubscriberInfo().getIccSerialNumber();
 	    Taint.addTaintString(simSerialNumber, Taint.TAINT_ICCID);
      	    // end WITH_TAINT_TRACKING
+     	    
             return simSerialNumber;
         } catch (RemoteException ex) {
             return null;
@@ -926,6 +927,7 @@ public class TelephonyManager {
 	    String subscriberId = getSubscriberInfo().getSubscriberId();
 	    Taint.addTaintString(subscriberId, Taint.TAINT_IMSI);
 	    // end WITH_TAINT_TRACKING
+	        Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getSubscriberId\" } }");
             return subscriberId;
         } catch (RemoteException ex) {
             return null;
@@ -967,6 +969,7 @@ public class TelephonyManager {
 	    mPhoneNumber = getSubscriberInfo().getLine1Number();
 	    Taint.addTaintString(mPhoneNumber, Taint.TAINT_PHONE_NUMBER);
 	    // end WITH_TAINT_TRACKING
+	        Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getLine1Number\" } }");
             return mPhoneNumber;
         } catch (RemoteException ex) {
             return null;
@@ -1008,6 +1011,7 @@ public class TelephonyManager {
     public String getMsisdn() {
         try {
             return getSubscriberInfo().getMsisdn();
+            Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getMsisdn\" } }");
         } catch (RemoteException ex) {
             return null;
         } catch (NullPointerException ex) {
@@ -1024,6 +1028,7 @@ public class TelephonyManager {
      */
     public String getVoiceMailNumber() {
         try {
+            Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getVoiceMailNumber\" } }");
             return getSubscriberInfo().getVoiceMailNumber();
         } catch (RemoteException ex) {
             return null;
