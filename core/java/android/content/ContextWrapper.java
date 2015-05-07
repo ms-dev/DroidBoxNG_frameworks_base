@@ -45,6 +45,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import dalvik.system.Taint;
+
 /**
  * Proxying implementation of Context that simply delegates all of its calls to
  * another Context.  Can be subclassed to modify behavior without changing
@@ -470,6 +472,11 @@ public class ContextWrapper extends Context {
 
     @Override
     public ComponentName startService(Intent service) {
+	if (service.getComponent() != null)
+	{
+		String serviceName = service.getComponent().getClassName();
+		Taint.log("DroidBox: { \"ServiceStart\": { \"name\": \"" + serviceName + "\" } }");
+	}
         return mBase.startService(service);
     }
 

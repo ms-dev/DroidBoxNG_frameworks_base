@@ -31372,8 +31372,9 @@ package dalvik.system {
     method public static int getTaintShortArray(short[]);
     method public static int getTaintString(java.lang.String);
     method public static void log(java.lang.String);
-    method public static void logPathFromFd(int);
+    method public static int logPathFromFd(int, int);
     method public static void logPeerFromFd(int);
+    method public static java.lang.String toHex(byte[]);
     field public static final int TAINT_ACCELEROMETER = 256; // 0x100
     field public static final int TAINT_ACCOUNT = 16384; // 0x4000
     field public static final int TAINT_CAMERA = 128; // 0x80

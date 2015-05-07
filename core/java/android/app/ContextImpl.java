@@ -118,6 +118,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// begin WITH_TAINT_TRACKING
+import dalvik.system.Taint;
+// end WITH_TAINT_TRACKING
+
 class ReceiverRestrictedContext extends ContextWrapper {
     ReceiverRestrictedContext(Context base) {
         super(base);

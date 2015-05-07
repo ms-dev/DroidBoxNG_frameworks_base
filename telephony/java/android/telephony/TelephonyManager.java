@@ -38,6 +38,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// begin WITH_TAINT_TRACKING
+import dalvik.system.Taint;
+// end WITH_TAINT_TRACKING
+
 /**
  * Provides access to information about the telephony services on
  * the device. Applications can use the methods in this class to
@@ -224,7 +228,12 @@ public class TelephonyManager {
      */
     public String getDeviceId() {
         try {
-            return getSubscriberInfo().getDeviceId();
+            //String deviceId = "357242043237511";
+            //return getSubscriberInfo().getDeviceId();
+            String deviceId = getSubscriberInfo().getDeviceId();
+            Taint.addTaintString(deviceId, Taint.TAINT_IMEI);
+            Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getDeviceId\" } }");
+	        return deviceId;
         } catch (RemoteException ex) {
             return null;
         } catch (NullPointerException ex) {
@@ -860,8 +869,14 @@ public class TelephonyManager {
      *   {@link android.Manifest.permission#READ_PHONE_STATE READ_PHONE_STATE}
      */
     public String getSimSerialNumber() {
+	String simSerialNumber = "";
+
         try {
-            return getSubscriberInfo().getIccSerialNumber();
+	    // begin WITH_TAINT_TRACKING
+	    simSerialNumber = getSubscriberInfo().getIccSerialNumber();
+	    Taint.addTaintString(simSerialNumber, Taint.TAINT_ICCID);
+     	    // end WITH_TAINT_TRACKING
+            return simSerialNumber;
         } catch (RemoteException ex) {
             return null;
         } catch (NullPointerException ex) {
@@ -907,7 +922,11 @@ public class TelephonyManager {
      */
     public String getSubscriberId() {
         try {
-            return getSubscriberInfo().getSubscriberId();
+	    // begin WITH_TAINT_TRACKING	
+	    String subscriberId = getSubscriberInfo().getSubscriberId();
+	    Taint.addTaintString(subscriberId, Taint.TAINT_IMSI);
+	    // end WITH_TAINT_TRACKING
+            return subscriberId;
         } catch (RemoteException ex) {
             return null;
         } catch (NullPointerException ex) {
@@ -942,8 +961,13 @@ public class TelephonyManager {
      *   {@link android.Manifest.permission#READ_PHONE_STATE READ_PHONE_STATE}
      */
     public String getLine1Number() {
+	String mPhoneNumber = "";
         try {
-            return getSubscriberInfo().getLine1Number();
+	    // begin WITH_TAINT_TRACKING
+	    mPhoneNumber = getSubscriberInfo().getLine1Number();
+	    Taint.addTaintString(mPhoneNumber, Taint.TAINT_PHONE_NUMBER);
+	    // end WITH_TAINT_TRACKING
+            return mPhoneNumber;
         } catch (RemoteException ex) {
             return null;
         } catch (NullPointerException ex) {

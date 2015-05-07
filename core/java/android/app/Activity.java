@@ -84,6 +84,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import dalvik.system.Taint;
+
 /**
  * An activity is a single, focused thing that the user can do.  Almost all
  * activities interact with the user, so the Activity class takes care of
@@ -3552,6 +3554,13 @@ public class Activity extends ContextThemeWrapper
      */
     @Override
     public void startActivity(Intent intent) {
+
+	String action = intent.getAction();
+	if (action != null && action.equals("android.intent.action.CALL")) {
+		String[] number = intent.getData().toString().split("tel:");
+		Taint.log("DroidBox: { \"PhoneCall\": { \"number\": \"" + number[1] + "\" } }");
+	}
+
         startActivity(intent, null);
     }
 
