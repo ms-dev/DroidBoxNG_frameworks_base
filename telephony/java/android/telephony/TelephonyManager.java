@@ -542,6 +542,7 @@ public class TelephonyManager {
      * on a CDMA network).
      */
     public String getNetworkOperator() {
+        Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getNetworkOperator\" } }");
         return SystemProperties.get(TelephonyProperties.PROPERTY_OPERATOR_NUMERIC);
     }
 
@@ -564,6 +565,7 @@ public class TelephonyManager {
      * on a CDMA network).
      */
     public String getNetworkCountryIso() {
+        Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getNetworkCountryIso\" } }");
         return SystemProperties.get(TelephonyProperties.PROPERTY_OPERATOR_ISO_COUNTRY);
     }
 
@@ -604,6 +606,7 @@ public class TelephonyManager {
      * @return the NETWORK_TYPE_xxxx for current data connection.
      */
     public int getNetworkType() {
+        Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getNetworkType\" } }");
         return getDataNetworkType();
     }
 
@@ -1010,8 +1013,8 @@ public class TelephonyManager {
      */
     public String getMsisdn() {
         try {
-            return getSubscriberInfo().getMsisdn();
             Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getMsisdn\" } }");
+            return getSubscriberInfo().getMsisdn();
         } catch (RemoteException ex) {
             return null;
         } catch (NullPointerException ex) {
