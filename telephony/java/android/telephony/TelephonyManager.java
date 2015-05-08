@@ -531,6 +531,7 @@ public class TelephonyManager {
      * on a CDMA network).
      */
     public String getNetworkOperatorName() {
+        Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getNetworkOperatorName\" } }");
         return SystemProperties.get(TelephonyProperties.PROPERTY_OPERATOR_ALPHA);
     }
 
@@ -854,6 +855,7 @@ public class TelephonyManager {
      * @see #getSimState
      */
     public String getSimOperatorName() {
+        Taint.log("DroidBox: { \"VM-Evasion\": { \"operation\": \"call\", \"name\": \"getSimOperatorName\" } }");
         return SystemProperties.get(TelephonyProperties.PROPERTY_ICC_OPERATOR_ALPHA);
     }
 
